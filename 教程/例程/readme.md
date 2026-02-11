@@ -13,6 +13,7 @@
 ## rp2
 
 - [rp2: 读取 boot 按键](rp2/rp2.读取boot按键/readme.md)
+- [rp2: 步进电机驱动](rp2/rp2.步进电机驱动/readme.md)
 
 ## 通用
 
