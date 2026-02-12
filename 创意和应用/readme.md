@@ -45,3 +45,4 @@
 - [Homekit 兼容的温度监控系统](homekit兼容的温度监控系统/readme.md)
 - [CyberMesh LoRaChat](lorachat/readme.md)
 - [小巧的桌面机器人](小巧的桌面机器人/readme.md)
+- [基于 ESP32 的人体传感器 ESPectre](基于esp32的人体传感器/readme.md)
