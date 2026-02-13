@@ -8,6 +8,7 @@
 - [Thonny](thonny/readme.md)
 - [Mu Editor](mu/readme.md)
 - [Visual Studio Code](vscode/readme.md)
+- [pycharm](pycharm/readme.md)
 - [Arduino Lab for MicroPython](arduino-lab-for-micropython/readme.md)
 
 **图形化编程**
