@@ -1,4 +1,4 @@
-# M5Stack Cores3
+# M5Stack CoreS3
 
 CoreS3 是 M5Stack 开发套件系列的第三代主机，核心主控采用 ESP32-S3，板载 16MB Flash 和 8MB PSRAM，可通过 USB Type-C 接口下载程序，支持 OTG 和 CDC 功能，方便外接 USB 设备和烧录固件，正面搭载一块 2.0 寸电容触摸 IPS 屏。
 
