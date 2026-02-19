@@ -27,3 +27,4 @@
 ## 相关链接
 
 * [项目网址](https://github.com/kevinmcaleer/tiny_wiki)
+* [circuitpython 移植版本](https://learn.adafruit.com/tiny-wiki-for-circuitpython)
