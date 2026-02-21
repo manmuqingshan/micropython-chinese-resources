@@ -10,6 +10,7 @@
 - [与Matt Trentini一起探讨MicroPython](与matt-trentini一起探讨micropython/readme.md)
 - [墨尔本MicroPython聚会](墨尔本micropython聚会/readme.md)
 - [RustPython](rustpython/readme.md)
+- [MicroPython 现在要求每个拉取请求都需披露AI相关信息](0001/readme.md)
 
 ---
 
