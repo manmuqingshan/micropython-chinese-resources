@@ -6,6 +6,7 @@
 - [树莓派 Pico2/ Pico2 W](rpi-pico2/readme.md)
 - [RP2350 Pico W5](rp2350-pico-w5/readme.md)
 - [Pimoroni Badger 2040](badger-2040/readme.md)
+- [Badgeware 智能徽章](badgeware智能徽章/readme.md)
 - [YD-RP2040](yd-rp2040/readme.md)
 - [RP2040-zero](rp2040-zero/readme.md)
 - [Seeed Studio XIAO RP2040](seeed_studio_xiao_rp2040/readme.md)
