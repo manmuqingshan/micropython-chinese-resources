@@ -18,3 +18,4 @@
 - [ESP32 Micropython W5500 MQTT](esp32-micropython-w5500-mqtt/readme.md)
 - [ESP32LVGL](esp32lvgl/readme.md)
 - [Micropython Mock Machine](micropython-mock-machine/readme.md)
+- [单线数据通信](singlelinedatatrans/readme.md)
