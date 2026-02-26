@@ -12,6 +12,7 @@
 - [RustPython](rustpython/readme.md)
 - [MicroPython 现在要求每个拉取请求都需披露AI相关信息](0001/readme.md)
 - [micropython 已添加到 debian 软件仓库](0002/readme.md)
+- [100 天，100 个物联网项目](0003/readme.md)
 
 ---
 
