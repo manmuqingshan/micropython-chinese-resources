@@ -22,3 +22,4 @@ micropython 中文社区开发、整理的各种传感器驱动、例程等。
 - [MCP401x 数字电位器](mcp401x/readme.md)
 - [INA219 电流传感器](ina219/readme.md)
 - [DS3231 高精度时钟](ds3231/readme.md)
+- [PCF8563 实时时钟](pcf8563/readme.md)
