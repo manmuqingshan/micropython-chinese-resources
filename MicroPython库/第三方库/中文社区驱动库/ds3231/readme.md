@@ -38,7 +38,7 @@ ds.Temperature()
 ## 芯片相关
 
 - [DS3231网站3](https://www.analog.com/cn/products/ds3231.html)
-- [中文数据手册](https://www.analog.com/media/cn/technical-documentation/data-sheets/DS3231_cn.pdf)
-- [英文数据手册](https://www.analog.com/media/en/technical-documentation/data-sheets/DS3231.pdf)
+  - [中文数据手册](https://www.analog.com/media/cn/technical-documentation/data-sheets/DS3231_cn.pdf)
+  - [英文数据手册](https://www.analog.com/media/en/technical-documentation/data-sheets/DS3231.pdf)
 - [micropython驱动](https://gitee.com/microbit/mpy-lib/tree/master/misc/DS3231)
 
