@@ -1,7 +1,12 @@
 # esp32/esp8266
 
 esp32 和 esp8266 芯片固件下载的方式是一样的，都是通过 usb 或者串口下载，只是参数上稍有区别。目前有多种软件支持下载固件，下面介绍最主要的几种。
-   
+- Flash Download Tool 
+- esptool
+- Thonny
+- UF2
+
+
 ## Flash Download Tool   
 
 Flash 下载工具（Flash Download Tool）是乐鑫官方提供的下载软件，它是一个标准的 windows 软件，带有容易操作的图形界面，可以方便的选择参数并下载程序，是 esp 系列芯片最常用的下载软件之一。Flash 下载工具的链接在：
@@ -110,3 +115,10 @@ esp32-s3，而最早的 esp32 是不支持 uf2 下载的；有的开发板带有
 circuitpython 其它 mcu 的开发板中，是快速按两次复位键进入 uf2 bootloader）。 
 
 如果你使用的开发板不在网站开发板列表中也没关系，只要芯片型号相同，uf2 bootloader 基本是通用的，但是引脚的定义可能会不同。
+
+
+## 其它
+
+- espflash
+
+  类似 esptool 的命令行工具，使用 go 开发。https://github.com/tinygo-org/espflash
