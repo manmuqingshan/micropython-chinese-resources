@@ -51,3 +51,4 @@
 - [创建属于你的虚拟电子宠物](创建虚拟宠物/readme.md)
 - [打造一个农历新年盒子](打造一个农历新年盒子/readme.md)
 - [microclawup](microclawup/redme.md)
+- [翻点显示屏](翻点显示屏/readme.md)
