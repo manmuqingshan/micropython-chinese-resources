@@ -11,6 +11,8 @@ Programming with MicroPython](programming_with_micropython/readme.md)
 Beginning MicroPython with the Raspberry Pi Pico](beginning_micropython_with_the_raspberry_pi_pico/readme.md)
 - [开始在Raspberry Pi Pico上使用MicroPython：官方Raspberry Pi Pico指南  
 Get started with MicroPython on Raspberry Pi Pico: The Official Raspberry Pi Pico Guide](get_started_with_micropython_on_raspberry_pi_pico/readme.md)
+- [Raspberry Pi Pico MicroPython开发入门  
+Getting Started With MicroPython Development for Raspberry Pi Pico](getting-started-with-micropython-development-for-raspberry-pi-pico/readme.md)
 - [用于Raspberry Pi Pico W的MicroPython：用Python编程数字电路的介绍  
 MicroPython for the Raspberry Pi Pico W: A gentle introduction to programming digital circuits with Python](micropython_for_the_raspberry_pi_pico_w/readme.md)
 - [用MicroPython编程ESP32  
