@@ -34,4 +34,20 @@ def esp32sx_usb_isconnect():
     return dp1 and dp2 and not dn1 and not dn2 
 ```
 
+改进后的另一种方法：
 
+esp32sx：包括 esp32s2、esp32s3
+```python
+from machine import mem32
+
+def esp32Sx_usb_isconnect():
+    return mem32[0x6008002c] == 0x40010
+```
+
+esp32cx：包括 esp32c3、esp32c6
+```python
+from machine import mem32
+
+def esp32Cx_usb_isconnect():
+    return mem32[0x6004302c] == 1
+```
