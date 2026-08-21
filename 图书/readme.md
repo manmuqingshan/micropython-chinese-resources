@@ -39,6 +39,8 @@ Electronics & MicroPython© with ESP32©: 80 complete projects](electronics-and-
 MicroPython and CircuitPython for Absolute Beginners : A Visual Guide to Embedded Systems](micropython-and-circuitpython-for-absolute-beginners/readme.md)
 - [MICROPYTHON和CIRCUITPYTHON：微控制器上python的完整指南：在RP2040、RP2350和ESP32硬件上构建物联网传感器、BLE设备、显示器和自动化项目  
 MICROPYTHON AND CIRCUITPYTHON: THE COMPLETE GUIDE TO PYTHON ON MICROCONTROLLERS: Build IoT Sensors, BLE Devices, Displays, and Automated Projects on RP2040, RP2350, and ESP32 Hardware](the-complete-guide-to-python-on-microcontrollers/readme.md)
+- [MicroPython掌握嵌入式系统：基于智能微控制器的物联网解决方案的设计、构建和优化指南（电气工程和编程书籍）  
+(MicroPython Mastery for Embedded Systems: Guide to Designing, Building, and Optimizing Smart Microcontroller-Based IoT Solutions (electrical engineering and programming books) )](micropython-mastery-for-embedded-systems/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
