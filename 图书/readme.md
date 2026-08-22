@@ -41,6 +41,8 @@ MicroPython and CircuitPython for Absolute Beginners : A Visual Guide to Embedde
 MICROPYTHON AND CIRCUITPYTHON: THE COMPLETE GUIDE TO PYTHON ON MICROCONTROLLERS: Build IoT Sensors, BLE Devices, Displays, and Automated Projects on RP2040, RP2350, and ESP32 Hardware](the-complete-guide-to-python-on-microcontrollers/readme.md)
 - [MicroPython掌握嵌入式系统：基于智能微控制器的物联网解决方案的设计、构建和优化指南（电气工程和编程书籍）  
 (MicroPython Mastery for Embedded Systems: Guide to Designing, Building, and Optimizing Smart Microcontroller-Based IoT Solutions (electrical engineering and programming books) )](micropython-mastery-for-embedded-systems/readme.md)
+- [物联网与MicroPython智能项目:在廉价微控制器上使用MicroPython构建物联网设备—无需电子技术经验  
+IoT with MicroPython Smart Projects on a Shoestring: Build IoT gadgets using Micro Python on cheap microcontrollers – no prior electronics experience needed](iot-with-micropython-smart-projects-on-a-shoestring/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
