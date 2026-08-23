@@ -43,6 +43,8 @@ MICROPYTHON AND CIRCUITPYTHON: THE COMPLETE GUIDE TO PYTHON ON MICROCONTROLLERS:
 (MicroPython Mastery for Embedded Systems: Guide to Designing, Building, and Optimizing Smart Microcontroller-Based IoT Solutions (electrical engineering and programming books) )](micropython-mastery-for-embedded-systems/readme.md)
 - [物联网与MicroPython智能项目:在廉价微控制器上使用MicroPython构建物联网设备—无需电子技术经验  
 IoT with MicroPython Smart Projects on a Shoestring: Build IoT gadgets using Micro Python on cheap microcontrollers – no prior electronics experience needed](iot-with-micropython-smart-projects-on-a-shoestring/readme.md)
+- [MicroPython和物联网项目：用Python编程微控制器和小工具  
+MicroPython and IoT Projects: Program Microcontrollers and Gadgets with Python](micropython-and-iot-projects/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
