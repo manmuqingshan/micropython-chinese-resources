@@ -51,3 +51,11 @@ from machine import mem32
 def esp32Cx_usb_isconnect():
     return mem32[0x6004302c] == 1
 ```
+
+esp32h2
+```python
+from machine import mem32
+
+def esp32Hx_usb_isconnect():
+    return mem32[0x6000f02c] == 1
+```
