@@ -45,6 +45,8 @@ MICROPYTHON AND CIRCUITPYTHON: THE COMPLETE GUIDE TO PYTHON ON MICROCONTROLLERS:
 IoT with MicroPython Smart Projects on a Shoestring: Build IoT gadgets using Micro Python on cheap microcontrollers – no prior electronics experience needed](iot-with-micropython-smart-projects-on-a-shoestring/readme.md)
 - [MicroPython和物联网项目：用Python编程微控制器和小工具  
 MicroPython and IoT Projects: Program Microcontrollers and Gadgets with Python](micropython-and-iot-projects/readme.md)
+- [MicroPython for ESP8266开发研讨会  
+MicroPython for ESP8266 Development Workshop](micropython-for-esp8266-development-workshop/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
