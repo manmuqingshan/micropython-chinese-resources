@@ -33,6 +33,102 @@ machine.mem32[GPIOA + GPIO_BSRR] = 1 << 2
 value = (machine.mem32[GPIOA + GPIO_IDR] >> 3) & 1
 ```
 
+注意：返回的值是带符号整数。示例：读取esp8266上的cpuid寄存器
+
+```python
+value = mem32[0x40001000]
+```
+
+将返回负值，这可能违反直觉。始终读取正整数，使用下面方法：
+
+```python
+value = mem32[0x40001000] & 0xffffffff
+```
+
+- machine.`mem_backup`(region=0)
+    
+  返回一个可写入的至少在软复位下能够保持不变的持久硬件内存区域 `memoryview` (内存视图)；支持电池后备的硬件也能在断电后保持。每个硬件的持久性各不相同，请参见下表。
+
+  `region` 选择要访问的备份区域（默认值0，主区域）。传递 `-1` 以获取所有可用区域的元组。
+
+  元素类型取决于硬件对齐要求：`B`（无符号字节）适用于具有字节可寻址备份内存的硬件，`I`（无符号32位）适用于由字大小寄存器支持的硬件。使用 `mem.itemsize` 在运行时识别访问粒度。
+
+  总的大小（以字节为单位）是 `len(mem) * mem.itemsize`，其中 `len(mem)` 是元素的数量，`mem.itemsize` 是每个元素的大小。例如，在具有4个字大小寄存器的硬件上，`len(mem)` 为 4，`mem.itemsize` 为 4，总共16个字节。在具有4096字节字节可寻址备份SRAM的硬件上，len（mem）为4096，mem.itemsize为1。
+
+  可移植代码的跨硬件保证：`mem.itemsize`为 `1` 或 `4`；有效索引为 `0..len(mem)-1`；超出范围的访问会引发 `IndexError`；数值按照主机本机字节顺序存储。区域索引语义不可移植，特别是 stm32，请参阅下面的注释。
+
+  使用方法
+  ```python
+  import machine
+  
+  mem = machine.mem_backup()
+  mem[0] = 0x12345678               # 写入元素 0
+  print(hex(mem[0]))                # 读取元素 0
+  print(len(mem))                   # 元素的数量
+  print(mem.itemsize)               # 每个元素大小
+  print(len(mem) * mem.itemsize)    # 总字节数
+  
+  # 发现所有可用区域
+  for i, r in enumerate(machine.mem_backup(-1)):
+      print(i, len(r), r.itemsize)
+  ```
+  
+  总字节大小和后备硬件因端口而异:
+  
+  | 硬件   | 后备存储                                     | 字节总数  | 电池后备 |
+  |--------|----------------------------------------------|-----------|----------|
+  | alif   | Backup SRAM                                  | 4080      | 是       |
+  | esp32  | RTC slow memory                              | 2048      | 否       |
+  | mimxrt | SNVS LPGPR 寄存器 (每芯片4个)                | 12-16     | 是       |
+  | nrf    | POWER GPREGRET 寄存器                        | 1-2       | 否       |
+  | rp2    | Watchdog scratch 寄存器                      | 28-60     | 否       |
+  | samd   | Backup RAM (仅SAMD51)                        | 8192      | 是       |
+  | stm32  | Backup SRAM + BKP 寄存器 (F4/F7/H5/H7/U5/N6) | 2048-8192 | 是       |
+  | stm32  | RTC BKP 寄存器 (其它系列)                    | 20-128    | 是       |
+
+  注意：在esp32和rp2上，数据在软复位 (Soft Reset)、`machine.reset()` 和 `machine.deepsleep()` 唤醒过程中持续不变，但在断电和类似 poweron 时丢失。特别是在esp32上，这包括按下大多数开发板上的EN/RESET按钮，芯片将其看为 poweron 复位。
+  
+  某些硬件会将备份存储分割到多个区域，或排除由引导加载程序或系统固件保留的寄存器：
+  
+  | 硬件   | 寄存器               | 说明                                 |
+  | ------ | -------------------- | ------------------------------------ |
+  | mimxrt | LPGPR[3]             | 排除；TinyUF2使用（当使用时）        |
+  | rp2    | scratch[4]           | 排除；pico-sdk在复位时使用           |
+  | rp2    | powman scratch[0..7] | 仅RP2350上的区域2                    |
+  | stm32  | BKP 寄存器           | BKPSRAM系列区域1（F4/F7/H5/H7/U5/N6）|
+  
+  使用 `machine.mem_backup(-1)` 查找可用区域及其大小。
+
+  在stm32上，区域索引在各方面没有统一的含义：在 BKPSRAM 系列上，区域 0 是BKPSRAM（`itemsize=1`），在其他系列上是 BKP 寄存器（`itemsize=4`）。可移植代码应在构造数据之前在 `mem.itemsize` 上分支。
+
+  区域内的部分寄存器是可访问的，但根据惯例保留，不应被覆盖。BKP 寄存器文件是 BKPSRAM 系列的区域 1 和其他系列的区域 0：
+
+  | 硬件  | 寄存器          | 使用                                                  |
+  | ----- | --------------- | ----------------------------------------------------- |
+  | stm32 | BKP0R           | Arduino引导加载程序（Portenta H7、Giga、Opta、Nicla） |
+  | stm32 | BKP16R-BKP18R   | STM32WB 的 `rfcore_firmware.py`                       |
+  | stm32 | 最后 BKP 寄存器 | 时钟频率 (MICROPY_HW_CLK_LAST_FREQ)                   |
+  | stm32 | BKP31R (N6)     | mboot引导加载程序入口                                 |
+  
+  缓冲区允许直接寄存器访问，并可与结构化布局的产品类型结合使用：
+
+  ```python
+  import machine, uctypes
+  
+  mem = machine.mem_backup()
+
+  # 通过uctypes进行结构化访问（检查 len(mem)）
+  layout = {
+      "flags": (0 * 4, uctypes.UINT32),   # 寄存器 0
+      "counter": (1 * 4, uctypes.UINT32), # 寄存器 1
+  }
+  
+  regs = uctypes.struct(uctypes.addressof(mem), layout)
+  regs.flags = 0x01
+  print(regs.counter)
+  ```
+  可用性：alif、esp32、mimxrt、nrf、rp2、samd、stm32。
+  
 ## 复位相关函数
 
 - machine.`reset`()
