@@ -14,36 +14,36 @@ machine 模块包含与硬件相关的特定功能。该模块中的大多数功
 
   读写 8/16/32 位内存。
 
-使用下标表示法`[...]`并传入目标地址来访问这些对象。请注意，无论访问的内存大小如何，地址均指字节地址。
+  使用下标表示法`[...]`并传入目标地址来访问这些对象。请注意，无论访问的内存大小如何，地址均指字节地址。
 
-**示例用法**（寄存器是特定于STM32微控制器）：
+  **示例用法**（寄存器是特定于STM32微控制器）：
 
-```python
-import machine
-from micropython import const
-
-GPIOA = const(0x48000000)
-GPIO_BSRR = const(0x18)
-GPIO_IDR = const(0x10)
-
-# 将PA2引脚置高
-machine.mem32[GPIOA + GPIO_BSRR] = 1 << 2
-
-# 读取PA3引脚值
-value = (machine.mem32[GPIOA + GPIO_IDR] >> 3) & 1
-```
-
-注意：返回的值是带符号整数。示例：读取esp8266上的cpuid寄存器
-
-```python
-value = mem32[0x40001000]
-```
-
-将返回负值，这可能违反直觉。始终读取正整数，使用下面方法：
-
-```python
-value = mem32[0x40001000] & 0xffffffff
-```
+  ```python
+  import machine
+  from micropython import const
+  
+  GPIOA = const(0x48000000)
+  GPIO_BSRR = const(0x18)
+  GPIO_IDR = const(0x10)
+  
+  # 将PA2引脚置高
+  machine.mem32[GPIOA + GPIO_BSRR] = 1 << 2
+  
+  # 读取PA3引脚值
+  value = (machine.mem32[GPIOA + GPIO_IDR] >> 3) & 1
+  ```
+  
+  注意：返回的值是带符号整数。示例：读取esp8266上的cpuid寄存器
+  
+  ```python
+  value = mem32[0x40001000]
+  ```
+  
+  将返回负值，这可能违反直觉。始终读取正整数，使用下面方法：
+  
+  ```python
+  value = mem32[0x40001000] & 0xffffffff
+  ```
 
 - machine.`mem_backup`(region=0)
     
