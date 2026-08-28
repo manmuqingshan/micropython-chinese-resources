@@ -24,6 +24,13 @@ esp32 模块包含专门用于控制 ESP32 芯片的函数和类。
   配置 EXT1 如何将设备从睡眠状态唤醒。`pins` 可以为 None 或有效 Pin 对象的元组/列表。`level` 应为 `esp32.WAKEUP_ALL_LOW` 或 `esp32.WAKEUP_ANY_HIGH`。
 <br><br>
 
+- esp32.`wake_on_gpio`(pins, level)
+
+  配置 GPIO 将设备从睡眠中唤醒。pins 可以是 `None` 或有效 Pin 对象的元组/列表。level 是 `esp32.WAKEUP_AL_LOW` 或 `esp32.WAKEUP_ANY_HIGH`。
+  
+  注意：有些硬件不支持 GPIO 从  deepsleep 中唤醒，在这些设备上，这里设置的引脚只能用来从 lightsleep 中唤醒。
+<br><br>
+
 - esp32.`gpio_deep_sleep_hold`(enable)
 
   配置在深度睡眠模式下是否保留非 RTC GPIO 引脚配置。`enable` 为布尔值。
