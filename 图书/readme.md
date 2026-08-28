@@ -47,6 +47,8 @@ IoT with MicroPython Smart Projects on a Shoestring: Build IoT gadgets using Mic
 MicroPython and IoT Projects: Program Microcontrollers and Gadgets with Python](micropython-and-iot-projects/readme.md)
 - [MicroPython for ESP8266开发研讨会  
 MicroPython for ESP8266 Development Workshop](micropython-for-esp8266-development-workshop/readme.md)
+- [ESP32编程入门变得简单：掌握Arduino IDE、MicroPython、物联网项目和ESP32-S3开发（智能系统和电子系列书2）  
+ESP32 Programming for Beginners Made Easy: Master Arduino IDE, MicroPython, IoT Projects, and ESP32-S3 Development (Smart System & Electronic Series Book 2)](esp32-programming-for-beginners-made-easy/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
