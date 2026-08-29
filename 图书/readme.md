@@ -49,6 +49,8 @@ MicroPython and IoT Projects: Program Microcontrollers and Gadgets with Python](
 MicroPython for ESP8266 Development Workshop](micropython-for-esp8266-development-workshop/readme.md)
 - [ESP32编程入门变得简单：掌握Arduino IDE、MicroPython、物联网项目和ESP32-S3开发（智能系统和电子系列书2）  
 ESP32 Programming for Beginners Made Easy: Master Arduino IDE, MicroPython, IoT Projects, and ESP32-S3 Development (Smart System & Electronic Series Book 2)](esp32-programming-for-beginners-made-easy/readme.md)
+- [Raspberry Pi Pico 2 W编程：用于物联网、自动化和嵌入式电子的MicroPython和C/C++技术（今天是初学者，明天是技术专业人士）  
+Raspberry Pi Pico 2 W Programming: MicroPython and C/C++ Techniques for IoT, Automation, and Embedded Electronics (Beginner Today, Professional Tomorrow in Tech) ](raspberry-pi-pico-2-w-programming/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
