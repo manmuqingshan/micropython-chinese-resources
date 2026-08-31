@@ -25,6 +25,7 @@
 - [select（数据流等待事件）](select/readme.md)
 - [socket](socket/readme.md)
 - [ssl（SSL/TLS模块）](ssl/readme.md)
+- [string.templatelib （模板字符串支持）](string.templatelib/readme.md)
 - [struct（打包和解包基本数据类型）](struct/readme.md)
 - [sys（系统特定功能）](sys/readme.md)
 - [time（时间函数）](time/readme.md)
