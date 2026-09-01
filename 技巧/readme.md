@@ -18,5 +18,6 @@
 - [自动判断系统](自动判断系统/readme.md)
 - [程序控制发出 ctrl-c](程序控制发出ctrl-c/readme.md)
 - [判断是否通过 USB 连接](判断是否通过usb连接/readme.md)
+- [日志文件](日志文件/readme.md)
 ---
 - [软件使用技巧](软件使用技巧/readme.md)
