@@ -52,7 +52,7 @@ https://dfu-util.sourceforge.net/releases/
 
 下面以 windows 版本为例进行说明。目前 Windows 软件的最后版本是 dfu-util-0.9-win64.zip，将下载的文件解压缩，在命令行下运行其中的 dfu-util.exe。软件有多个命令行参数，我们常用的只有两个：查看设备列表和下载程序。
 
-- `dfu-util.exe -list`
+- `dfu-util.exe --list`
 
   查看系统中 dfu 设备。一个设备会显示 4 行，代表芯片内部 4 个不同的 flash 区，我们需要使用的 Internal Flash，通常也就是 0。
   
