@@ -33,7 +33,7 @@ Flash Download Tool 支持 esp 全系列的芯片，运行后需要先选择芯�
    
 设置好参数就可以点击 ERASE 擦除芯片内容和 START 下载固件。注意目前不同型号的芯片固件对应的起始地址是不同的:
 
-- 0x0000: esp32-c2、esp32-c3、esp32-c6、esp32-s3、esp32-h2
+- 0x0000: esp8266、esp32-c2、esp32-c3、esp32-c6、esp32-s3、esp32-h2
 - 0x1000: esp32、esp32-s2
 - 0x2000: esp32-c5、esp32-p4
    
@@ -51,8 +51,9 @@ Flash Download Tool 支持 esp 全系列的芯片，运行后需要先选择芯�
    
 `esptool -p PORT -c CHIP CMD` 
    
-- `-p` 或  `--port`，指定下载串口
+- `-p` 或 `--port`，指定下载串口
 - `-c` 或 `--chip`，指定芯片型号，也可以选择 `auto`，让软件自动识别
+- `-b` 或 `--baud`，指定波特率
 - CMD，操作命令，不同命令后面还有不同参数
 
    
@@ -72,10 +73,14 @@ Flash Download Tool 支持 esp 全系列的芯片，运行后需要先选择芯�
    
 如果是 Linux 操作系统，需要在终端的 shell 提示符中运行 esptool，使用方式和 windows 下是相同的，主要区别是串口的形式不同，如：
    
-`esptool.py —chip esp32 —port /dev/ttyUSB0 erase_flash` 
+`esptool --chip esp32 --port /dev/ttyUSB0 erase_flash` 
    
 Linux 下串口通常表示为 `/dev/ttyUSB0`、`/dev/ttyS0` 等，有多个设备时序号会递增，可以用 `ls /dev/tty*` 查看。
-   
+
+注：
+- 有些较早期的esp8266模块，使用 Flash_Download_Tool 或其它软件下载固件后可能无法进入 REPL，这时往往需要使用 esptool 才能解决问题，可以试试下面命令（注意请替换串口、flash大小、固件文件为实际值）：
+`esptool -c esp8266 -p COM108 write_flash -fm dio —flash_size 4MB 0 ESP8266_GENERIC-20260824-v1.29.0.bin`
+
 ### esptool 在线版 
 
 esptool 使用虽然方便，但是需要先安装 python，然后在安装 esptool，对于初学者还是比较复杂。有的网站为了方便初学者，提供了在线式的 esptool，可以通过浏览器直接对 esp32 进行编程（只支持带原生 usb 功能的型号），无需安装任何软件，只需要一个支持 webusb 功能的浏览器（目前大部分 chrome 内核浏览器都可以，包括windows 中最新的 Edge 浏览器，但不支持 IE、Firefox、Safari 浏览器），打开网站（如 Adafruit ESPTool 网站，类似功能的网站还有多个）就能下载固件：
