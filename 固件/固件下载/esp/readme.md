@@ -79,7 +79,9 @@ Linux 下串口通常表示为 `/dev/ttyUSB0`、`/dev/ttyS0` 等，有多个设�
 
 注：
 - 有些较早期的esp8266模块，使用 Flash_Download_Tool 或其它软件下载固件后可能无法进入 REPL，这时往往需要使用 esptool 才能解决问题，可以试试下面命令（注意请替换串口、flash大小、固件文件为实际值）：
-`esptool -c esp8266 -p COM108 write_flash -fm dio —flash_size 4MB 0 ESP8266_GENERIC-20260824-v1.29.0.bin`
+  ```bash
+  esptool -c esp8266 -p COM108 write_flash -fm dio —flash_size 4MB 0 ESP8266_GENERIC-20260824-v1.29.0.bin`
+  ```
 
 ### esptool 在线版 
 
