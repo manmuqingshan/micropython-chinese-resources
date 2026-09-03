@@ -15,7 +15,19 @@ ESP-NOW 是一种无连接的无线通信协议，支持：
 
 它特别适用于小型物联网网络、对延迟敏感或对功耗敏感的应用（如电池供电设备）以及设备之间的长距离通信（数百米）。
 
-一个简单的示例如下：
+### ESP-NOW 版本
+
+从 ESP-IDF V5.4 开始，在ESP32上支持两个 ESP-NOW 版本：V1和V2。
+- V2设备支持的最大数据包长度为1470字节
+- V1设备支持的最大数据包长度为250字节。
+
+要在运行时检查ESP-NOW V2是否可用，请检查 `espnow.MAX_DATA_LEN` 的值。
+
+ESP-NOW V2设备能够从V2和V1设备接收数据包。
+
+ESP-NOW V1设备（包括ESP8266）可以从其他V1设备接收数据包，或数据包长度不超过250字节的V2设备。对于超过此长度的数据包，V1设备将把数据截断为第一个250字节或完全丢弃该数据包。
+
+### 示例
 
 **发送端：**
 ```python
@@ -357,12 +369,43 @@ sta.disconnect()  # 对于 ESP8266
 
 ## 常量
 
-  - espnow.`MAX_DATA_LEN` (=250)
-  - espnow.`KEY_LEN` (=16)
-  - espnow.`ADDR_LEN` (=6)
-  - espnow.`MAX_TOTAL_PEER_NUM` (=20)
-  - espnow.`MAX_ENCRYPT_PEER_NUM` (=6)
+- espnow.`MAX_DATA_LEN` (=250 或 1470，分别对应 ESPNow V1 和 V2)
+- espnow.`KEY_LEN` (=16)
+- espnow.`ADDR_LEN` (=6)
+- espnow.`MAX_TOTAL_PEER_NUM` (=20)
+- espnow.`MAX_ENCRYPT_PEER_NUM` (=6)
 
+以下常数仅对应ESP32上的不同传输数据速率。较低的数据速率通常在长距离上更可靠：
+
+- espnow.`RATE_LORA_250K`
+- espnow.`RATE_LORA_500K`
+  参考远距离模式。
+- espnow.`RATE_1M`
+- espnow.`RATE_2M`
+- espnow.`RATE_5M`
+- espnow.`RATE_6M`
+- espnow.`RATE_11M`
+- espnow.`RATE_12M`
+- espnow.`RATE_24M`
+- espnow.`RATE_54M`
+
+除非使用两种专有的远程数据速率，否则只有发送方必须配置数据速率。
+
+## 远距离模式
+
+注：仅esp32，除了 esp32c2。
+
+使用 `espnow.RATE_LORA_250K` 和 `espnow.RATE_LORA_500K` 数据速率，首先将WLAN接口对象设置为远程模式，即：
+
+```python
+import network, espnow
+sta = network.WLAN(network.WLAN.IF_STA)
+sta.active(True)
+sta.config(channel=6, protocol=WLAN.PROTOCOL_LR) # 在 sender 和 receiver 端设置
+e = espnow.ESPNow()
+e.config(rate=espnow.RATE_LORA_250K) # 仅 sender 端需要 
+```
+有关远距离模式限制的更多信息，请参阅`WLAN.PROTOCOL_LR`。
 
 ## 异常
 
