@@ -32,4 +32,4 @@
 
 ## 购买链接
 
-- [亚马逊]()https://www.amazon.com/-/zh/dp/B0GGDL9F5J)
+- [亚马逊](https://www.amazon.com/-/zh/dp/B0GGDL9F5J)
