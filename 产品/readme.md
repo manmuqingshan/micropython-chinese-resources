@@ -9,3 +9,4 @@
 - [Meatdryer](meatdryer/readme.md)
 - [AMYboard](amyboard/readme.md)
 - [ColdCard](coldcard/readme.md)
+- [CircuitPython中的Synthiota合成器套件 – SmallRun](synthiota合成器套件/readme.md)
