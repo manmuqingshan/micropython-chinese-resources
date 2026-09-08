@@ -239,18 +239,99 @@ nic.connect('你的-SSID', '你的-密钥')
 
   下面是常用支持参数（具体参数可用性取决于网络技术类型、驱动和 MicroPython 移植版本）  
 
-  | 参数         | 描述                                                                       |
-  |--------------|--------------------------------------------------------------------------|
-  | `mac`        | MAC地址（bytes类型）                                                         |
-  | `ssid`       | WiFi接入点名称（字符串）                                                     |
-  | `channel`    | WiFi频道（整数，部分端口仅在AP接口支持此参数）                                |
-  | `hidden`     | 是否隐藏SSID（布尔值）                                                       |
-  | `security`   | 支持的安全协议（枚举值，见模块常量）                                          |
-  | `key`        | 接入密钥（字符串）                                                           |
+  | 参数         | 描述                                                                              |
+  |--------------|-----------------------------------------------------------------------------------|
+  | `mac`        | MAC地址（bytes类型）                                                              |
+  | `ssid`       | WiFi接入点名称（字符串）                                                          |
+  | `channel`    | WiFi频道（整数，部分端口仅在AP接口支持此参数）                                    |
+  | `hidden`     | 是否隐藏SSID（布尔值）                                                            |
+  | `security`   | 支持的安全协议（枚举值，见模块常量）                                              |
+  | `key`        | 接入密钥（字符串）                                                                |
   | `hostname`   | 发送给DHCP（STA模式）和mDNS（若支持）的主机名（已弃用，改用`network.hostname()`） |
-  | `reconnects` | 重连尝试次数（整数，`0`=不尝试，`-1`=无限次）                                  |
-  | `tx_power`   | 最大发射功率（dBm，整数或浮点数）                                             |
-  | `pm`         | WiFi电源管理设置（取值见下方常量）                                  |
+  | `reconnects` | 重连尝试次数（整数，`0`=不尝试，`-1`=无限次）                                     |
+  | `tx_power`   | 最大发射功率（dBm，整数或浮点数）                                                 |
+  | `pm`         | WiFi电源管理设置（取值见下方常量）                                                |
+  | `protocol`   | 仅 ESP32。WiFi 底层 802.11 协议，参见 `WLAN.PROTOCOL_DEFAULT`。                   |
+  | `bandwidth`  | 仅 ESP32。WiFi 信道带宽，参见 `WLAN.BANDWIDTH_20` 和其它。                        |
+
+#### CSI方法（仅ESP32）
+
+注意：这些方法仅在启用 CSI 支持的 ESP32 版本上可用。标准通用版本的 ESP32、ESP32-C3、ESP32-C5、ESP32-C6 和 ESP32-S3 默认已经启用了此功能。其他版本需要在 ESP-IDF 配置中启用 `CONFIG_ESP_WIFI_CSI_ENABLED=y`。
+
+信道状态信息（CSI）提供从接收到的Wi-Fi帧导出的物理层信道数据。CSI捕获需要活动的Wi-Fi连接和设备的传入流量。没有流量，将无法捕获CSI帧。
+
+其他Espressif CSI选项被硬编码为用于连接电台捕获的默认值。
+
+- WLAN.`csi_enable`(buffer_size=16)
+
+  启用CSI捕获并为接收到的帧分配循环缓冲区。
+  
+  可选的`buffer_size`参数设置在丢弃新传入帧之前存储的帧数，较大的值会以RAM为代价减少丢弃数量。确切的最大值取决于构建，但受底层环缓冲区实现的限制，大约为100帧。
+  
+  如果无法启用CSI，例如如果Wi-Fi未处于活动状态或ESP-IDF拒绝配置，则引发`OSError`。
+  
+  示例：
+  ```python
+  import network
+  import time
+  
+  wlan = network.WLAN(network.WLAN.IF_STA)
+  wlan.active(True)
+  wlan.config(protocol=network.MODE_11B | network.MODE_11G | network.MODE_11N)
+  wlan.config(pm=wlan.PM_NONE)
+  wlan.connect("SSID", "password")
+  
+  while not wlan.isconnected():
+      time.sleep_ms(100)
+  
+  wlan.csi_enable(buffer_size=32)
+  ```
+
+- WLAN.`csi_disable`()
+
+  禁用 CSI 捕获并清理资源。
+
+- WLAN.`csi_read`([result ])
+
+  从缓冲区读取CSI帧。
+  
+  **返回**：包含CSI帧数据的列表，如果没有可用帧，则返回`None`。
+  
+  如果提供了可选的`result`参数，则它必须是 `WLAN.csi_read()` 返回的前一个列表。列表将就地更新并再次返回。这通过重用现有的列表对象，以及在捕获的帧合适时重用现有的CSI数据 bytearray.，减少了繁忙读取循环中的堆混乱。
+  
+  **帧列表字段（按顺序）**：
+  - **0 - rssi**（int）：接收信号强度，单位为 dBm
+  - **1 - channel**（int）：Wi-Fi通道号
+  - **2 - mac**（bytes）：源mac地址（6字节）
+  - **3 - timestamp**（int）：以微秒为单位的时间戳
+  - **4 - local_timestamp**（int）：来自Wi-Fi硬件的本地时间戳
+  - **5 - data**（bytearray）：CSI原始数据（I/Q分量为int8_t值）
+  - **6 - rate**（int）：数据速率
+  - **7 - sig_mode**（int）：信号模式（传统、HT、VHT）
+  - **8 - mcs**（int）：调制和编码方案索引
+  - **9 - cwb**（int）：信道带宽
+  - **10 - smoothing**（int）：应用平滑
+  - **11 - not_sounding**（int）：不发声帧
+  - **12 - aggregation**（int）：聚合
+  - **13 - stbc**（int）：STBC
+  - **14 - fec_coding**（int）：fec编码
+  - **15 - sgi**（int）：短GI
+  - **16 - noise_floor**（int）：背景噪声级，单位为dBm
+  - **17 - ampdu_cnt**（int）：ampdu计数
+  - **18 - secondary_channel**（int）：第二通道
+  - **19 - ant**（int）：天线
+  - **20 - sig_len**（int）：信号长度
+  - **21 - rx_state**（int）：rx状态
+
+  在ESP-IDF未在公共CSI接收结构中提供相应值的目标上，一些元数据字段可能为0。
+
+- WLAN.`csi_available`()
+
+  获取缓冲区中可用的CSI帧数。
+
+- WLAN.`csi_dropped`()
+
+  获取由于缓冲区溢出而丢弃的CSI帧数。当缓冲区已满，新帧到达速度快于读取速度时，帧会被丢弃。在`csi_enable())`中增加`buffer_size`以减少丢弃。
 
 #### 常量  
 
@@ -263,6 +344,36 @@ nic.connect('你的-SSID', '你的-密钥')
   - `PM_POWERSAVE`：启用深度省电模式，牺牲部分性能
   - `PM_NONE`：禁用电源管理
 
+#### ESP32 协议常量
+
+以下是仅ESP32存在的与WLAN.config（protocol=…）网络接口参数相关常量：
+
+- WLAN.`PROTOCOL_DEFAULT`
+
+  表示芯片支持的所有默认802.11 Wi-Fi模式的位图。有关详细信息，请参阅[ESP-IDF Wi-Fi协议文档](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/wifi.html#wi-fi-protocol-mode)。
+
+- WLAN.`PROTOCOL_LR`
+
+  对应于Espressif专有的[“远距离”模式](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/wifi.html#long-range-lr)，该模式与标准Wi-Fi设备不兼容。通过设置此协议，远距离模式下的ESP32 STA可以在远程模式下连接到ESP32 AP，或使用ESP-NOW远程模式。
+  
+  此模式可以与一些标准802.11协议位（包括 `WLAN.PROTOCOL_DEFAULT`）进行位或运算，以支持标准Wi-Fi模式和LR模式的混合。有关更多详细信息，请参阅[Espressif远距离模式文档](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/api-guides/wifi.html#long-range-lr)。
+
+  ESP32-C2 不支持远距离模式。
+
+- WLAN.`BANDWIDTH_20`
+- WLAN.`BANDWIDTH_40`
+- WLAN.`BANDWIDTH_80`
+- WLAN.`BANDWIDTH_160`
+- WLAN.`BANDWIDTH_80_80`
+
+  `WLAN.config(bandwidth=...)`网络接口参数的允许值：
+  - BANDWIDTH_20：在STA和AP模式下指定20MHz宽的WiFi信道
+  - BANDWIDTH_40：在STA和AP模式下指定40MHz宽的WiFi信道
+  - BANDWIDTH_80：在AP模式下指定80MHz宽的WiFi信道，并非所有ESP32型号都支持
+  - BANDWIDTH_160：在AP模式下指定160MHz宽的WiFi信道，并非所有ESP32型号都支持
+  - BANDWIDTH_80_80：指定在AP模式下的多天线 80MHz+80MHz 宽WiFi信道设置，并非所有ESP32型号都支持。
+
+  在STA模式下，带宽只能在适配器未连接到网络时更改。在AP模式下，可以随时更改。
 
 ### class WLANWiPy – WiPy 专用 WiFi 控制
 
@@ -621,6 +732,63 @@ ppp.disconnect()
 
   安全连接的类型。
 
+### class USBD_NCM - USB NCM 网络接口
+
+此类使用 NCM（Network Control Model，网络控制模型）协议通过 USB 提供网络接口。主机将此设备视为 USB 以太网适配器，并通过 DHCP（由MicroPython设备提供服务）为其分配IP地址。
+
+**注意**：`network.USBD_NCM`需要一个支持 TinyUSB 和 NCM 的端口，在构建时通过定义 `MICROPY_PY_network_USBD_NCM`（默认关闭）启用。
+
+使用方法：
+```python
+import network
+
+nic = network.USBD_NCM()
+nic.active(True)
+# 等待 USB 主机配置 NCM 接口
+while not nic.isconnected():
+    pass
+
+print(nic.ipconfig("addr4"))
+```
+
+#### 构造函数
+
+- class network.`USBD_NCM`
+
+  创建并返回 USBD_NCM 对象。如果 NCM 网络接口尚未初始化，则进行初始化。只能存在一个实例（单例）。
+
+#### 方法
+
+- USBD_NCM.`active`([is_active ])
+
+  激活或停用网络接口。无参数返回当前状态（bool）。
+  
+  在 USB 枚举之前，接口会自动打开，因此启动时返回 `True`。
+
+- USBD_NCM.`isconnected`()
+
+  如果USB主机已配置NCM接口，则返回 `True`，否则返回 `False`。
+  
+  当USB断开连接时，返回 `False`，网络流量停止。该接口仍在lwIP中注册，当主机重新连接并重新枚举设备时可以恢复。
+
+- USBD_NCM.`status`()
+
+  以整数形式返回链接状态：如果接口正常，则返回1，否则返回0。
+
+- USBD_NCM.`ipconfig`('param')
+- USBD_NCM.`ipconfig`(param=value, ...)
+
+  参见 AbstractNIC.ipconfig。
+  
+- USBD_NCM.`ifconfig`([(ip, subnet, gateway, dns)])
+
+  参见 AbstractNIC.ifconfig。
+
+#### 备注
+
+**链路本地IP地址**：设备IP（169.254.x.1）是从设备MAC地址确定地导出的。RFC 3927 ARP探测/通告（冲突检测）没有实现，因此如果两个设备恰好在同一网段上导出相同的地址，则冲突将无法被检测到。
+
+**MAC地址唯一性**：设备和主机侧MAC地址从`mp_hal_get_MAC()`返回的值中导出。如果两个板具有相同的硬件MAC（例如端口不使用硬件UID），它们将显示相同的网络地址并导致ARP冲突。
 
 ## 网络功能  
 
