@@ -55,6 +55,8 @@ ESP32 Programming for Beginners Made Easy: Master Arduino IDE, MicroPython, IoT 
 Raspberry Pi Pico 2 W Programming: MicroPython and C/C++ Techniques for IoT, Automation, and Embedded Electronics (Beginner Today, Professional Tomorrow in Tech) ](raspberry-pi-pico-2-w-programming/readme.md)
 - [ESP32-CAM Python编程：使用MicroPython的计算机视觉、物联网项目和相机应用程序实用指南  
 ESP32-CAM Programming With Python: A Practical Guide to Computer Vision, IoT Projects, and Camera Applications Using MicroPython](esp32-cam-programming-with-python/readme.md)
+- [终极ESP32-CAM项目指南手册：12个家庭自动化、远程安全摄像头和MicroPython集成的分步教程（包括FTDI故障排除指南）  
+THE ULTIMATE ESP32-CAM PROJECTS GUIDE HANDBOOK: 12 Step-by-Step Tutorials for Home Automation, Remote Security Cameras, and MicroPython Integration (Includes FTDI Troubleshooting Guide)](the-ultimate-esp32-cam-projects-guide-handbook/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
