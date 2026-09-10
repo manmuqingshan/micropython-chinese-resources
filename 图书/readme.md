@@ -57,6 +57,8 @@ Raspberry Pi Pico 2 W Programming: MicroPython and C/C++ Techniques for IoT, Aut
 ESP32-CAM Programming With Python: A Practical Guide to Computer Vision, IoT Projects, and Camera Applications Using MicroPython](esp32-cam-programming-with-python/readme.md)
 - [终极ESP32-CAM项目指南手册：12个家庭自动化、远程安全摄像头和MicroPython集成的分步教程（包括FTDI故障排除指南）  
 THE ULTIMATE ESP32-CAM PROJECTS GUIDE HANDBOOK: 12 Step-by-Step Tutorials for Home Automation, Remote Security Cameras, and MicroPython Integration (Includes FTDI Troubleshooting Guide)](the-ultimate-esp32-cam-projects-guide-handbook/readme.md)
+- [嵌入式硬件通信：使用MicroPython的协议、接口、物联网和嵌入式视觉实用指南  
+Embedded Hardware Communication: A Practical Guide to Protocols, Interfaces, IoT, and Embedded Vision Using MicroPython](embedded-hardware-communication/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
