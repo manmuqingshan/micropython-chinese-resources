@@ -23,6 +23,8 @@
 - [超级任天堂上的 MicroPython](超级任天堂上的micropython/readme.md)
 - [比特币钱包 COLDCARD 漏洞事件](比特币钱包coldcard漏洞事件/readme.md)
 - [通过 pip 安装 micropython](通过pip安装micropython/readme.md)
+- [pymcu-micropython](pymcu-micropython/readme.md)
+
 
 ---
 
