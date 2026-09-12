@@ -61,6 +61,8 @@ THE ULTIMATE ESP32-CAM PROJECTS GUIDE HANDBOOK: 12 Step-by-Step Tutorials for Ho
 Embedded Hardware Communication: A Practical Guide to Protocols, Interfaces, IoT, and Embedded Vision Using MicroPython](embedded-hardware-communication/readme.md)
 - [Micropython简介：探索Esp32开发模块  
 Introduction To Micropython: Discover The Esp32 Dev Module](introduction-to-micropython/readme.md)
+- [射频传感器系统的 MicroPython 编程：实用指南  
+MicroPython Programming For Radio Frequency Sensor Systems: A Practical Guide](micropython-programming-for-radio-frequency-sensor-systems/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
