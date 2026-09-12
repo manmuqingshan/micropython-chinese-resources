@@ -59,6 +59,8 @@ ESP32-CAM Programming With Python: A Practical Guide to Computer Vision, IoT Pro
 THE ULTIMATE ESP32-CAM PROJECTS GUIDE HANDBOOK: 12 Step-by-Step Tutorials for Home Automation, Remote Security Cameras, and MicroPython Integration (Includes FTDI Troubleshooting Guide)](the-ultimate-esp32-cam-projects-guide-handbook/readme.md)
 - [嵌入式硬件通信：使用MicroPython的协议、接口、物联网和嵌入式视觉实用指南  
 Embedded Hardware Communication: A Practical Guide to Protocols, Interfaces, IoT, and Embedded Vision Using MicroPython](embedded-hardware-communication/readme.md)
+- [Micropython简介：探索Esp32开发模块  
+Introduction To Micropython: Discover The Esp32 Dev Module](introduction-to-micropython/readme.md)
 
 - 其它
   - [Bridging the TinyML Language Gap with MicroPython and Emlearn  
