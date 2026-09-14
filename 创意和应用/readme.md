@@ -84,3 +84,4 @@
 - [在反显LCD上构建天气主屏幕](在反显lcd上构建天气主屏幕/readme.md)
 - [薛定谔的厕所: 你是否在那里](薛定谔的厕所/readme.md)
 - [史莱克时钟](史莱克时钟/readme.md)
+- [MicroPython的纯Python ROS 2客户端 - Snakeros](snakeros/readme.md)
