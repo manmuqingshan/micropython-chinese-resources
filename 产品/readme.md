@@ -10,3 +10,4 @@
 - [AMYboard](amyboard/readme.md)
 - [ColdCard](coldcard/readme.md)
 - [CircuitPython中的Synthiota合成器套件 – SmallRun](synthiota合成器套件/readme.md)
+- [智能步态仿生机器狗 Petoi](petoi/readme.md)
