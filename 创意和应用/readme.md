@@ -85,3 +85,4 @@
 - [薛定谔的厕所: 你是否在那里](薛定谔的厕所/readme.md)
 - [史莱克时钟](史莱克时钟/readme.md)
 - [MicroPython的纯Python ROS 2客户端 - Snakeros](snakeros/readme.md)
+- [磁带式 MP3 播放器](磁带式mp3播放器/readme.md)
